@@ -1,13 +1,9 @@
 package com.example;
 
-public class Shape {
+public interface Shape {
 
     // return the area of the shapes
-    public double area() {
-        return 0;
-    } 
+    public double area();
 
-    public String info() {
-        return "";
-    }
+    public String info();
 }

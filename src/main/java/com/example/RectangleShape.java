@@ -1,9 +1,9 @@
 package com.example;
 
-public class RectangleShape extends Shape {
+public class RectangleShape implements Shape {
 
-    private double width;
-    private double length;
+    public double width;
+    public double length;
 
     public RectangleShape(double width, double length) {
         this.width = width;

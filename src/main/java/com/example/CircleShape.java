@@ -1,8 +1,8 @@
 package com.example;
 
-public class CircleShape extends Shape {
+public class CircleShape implements Shape {
 
-    private double radius;
+    public double radius;
 
     public CircleShape(double radius) {
         this.radius = radius;

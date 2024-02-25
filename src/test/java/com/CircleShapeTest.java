@@ -16,7 +16,7 @@ public class CircleShapeTest
      * Rigorous Test :-)
      */
     @Test
-    public void testAreaFuncs()
+    public void testArea()
     {
         
         

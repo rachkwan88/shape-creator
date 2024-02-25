@@ -14,7 +14,7 @@ public class RectangleShapeTest {
      * Rigorous Test :-)
      */
     @Test
-    public void testAreaFuncs() {
+    public void testArea() {
 
         RectangleShape rectangle1 = new RectangleShape(4, 7);
         assertTrue(rectangle1.area() == 28);
