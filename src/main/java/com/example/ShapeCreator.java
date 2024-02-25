@@ -86,7 +86,7 @@ public class ShapeCreator {
                 out.close();
             }
         } catch (IOException e) {
-            System.out.println("failed to create")
+            System.out.println("failed to create");
         }
     }
 
@@ -119,7 +119,7 @@ public class ShapeCreator {
 
             reader.close();
         } catch (IOException e) {
-            System.out.println("failed to create")
+            System.out.println("failed to create");
         }
     }
 
