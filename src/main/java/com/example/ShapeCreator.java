@@ -59,63 +59,71 @@ public class ShapeCreator {
         System.out.println("Rectangle created." + shape.info());
     }
 
-    public void doSave() throws IOException {
-        String fileName = "shapes.txt";
-        BufferedWriter out = null;
-        File file = new File(fileName);
-        FileWriter fstream;
-        
-        if (file.exists()) {
-            fstream = new FileWriter(fileName, false);// if file exists append to file. Works fine.
-        } else {
-            file.createNewFile();
-            fstream = new FileWriter(file);
-        }
-        out = new BufferedWriter(fstream);
-
-        for (Shape shape : shapes) {
-            if (shape instanceof CircleShape) {
-                out.write("circle," + ((CircleShape) shape).radius + "\n");
-            } else if (shape instanceof RectangleShape) {
-                out.write("rectangle," + ((RectangleShape) shape).length + "," + ((RectangleShape) shape).width + "\n");
+    public void doSave() {
+        try {
+            String fileName = "shapes.txt";
+            BufferedWriter out = null;
+            File file = new File(fileName);
+            FileWriter fstream;
+            
+            if (file.exists()) {
+                fstream = new FileWriter(fileName, false);// if file exists append to file. Works fine.
+            } else {
+                file.createNewFile();
+                fstream = new FileWriter(file);
             }
-        }
+            out = new BufferedWriter(fstream);
 
-        if (out != null) {
-            out.close();
+            for (Shape shape : shapes) {
+                if (shape instanceof CircleShape) {
+                    out.write("circle," + ((CircleShape) shape).radius + "\n");
+                } else if (shape instanceof RectangleShape) {
+                    out.write("rectangle," + ((RectangleShape) shape).length + "," + ((RectangleShape) shape).width + "\n");
+                }
+            }
+
+            if (out != null) {
+                out.close();
+            }
+        } catch (IOException e) {
+            System.out.println("failed to create")
         }
     }
 
-    public void doLoad() throws IOException {
-        BufferedReader reader;
+    public void doLoad() {
+        try {
+            BufferedReader reader;
 
-        ArrayList<Shape> tempShapes = new ArrayList<Shape>();
+            ArrayList<Shape> tempShapes = new ArrayList<Shape>();
 
-        reader = new BufferedReader(new FileReader("shapes.txt"));
-        while (true) {
-            String line = reader.readLine();
-            if (line == null) {
-                break;
+            reader = new BufferedReader(new FileReader("shapes.txt"));
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+
+                String tokens[] = line.split(",");
+                if (tokens[0].equals("circle")) {
+                    CircleShape circle = new CircleShape(Double.parseDouble(tokens[1]));
+                    tempShapes.add(circle);
+                } else if (tokens[0].equals("rectangle")) {
+                    RectangleShape rectangle = new RectangleShape(Double.parseDouble(tokens[1]),
+                            Double.parseDouble(tokens[2]));
+                    tempShapes.add(rectangle);
+                }
+
             }
 
-            String tokens[] = line.split(",");
-            if (tokens[0].equals("circle")) {
-                CircleShape circle = new CircleShape(Double.parseDouble(tokens[1]));
-                tempShapes.add(circle);
-            } else if (tokens[0].equals("rectangle")) {
-                RectangleShape rectangle = new RectangleShape(Double.parseDouble(tokens[1]),
-                        Double.parseDouble(tokens[2]));
-                tempShapes.add(rectangle);
-            }
+            shapes = tempShapes;
 
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("failed to create")
         }
-
-        shapes = tempShapes;
-
-        reader.close();
     }
 
-    public void run() throws IOException {
+    public void run() {
 
         System.out.println("Welcome to ShapeCreator! For more info, type help");
 
